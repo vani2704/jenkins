@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('check out') {
+            steps {
+               git branch: 'main', url: 'https://github.com/vani2704/jenkins.git'
+            }
+        }
+    stage('init-plan-action') {
+            steps {
+                sh'terraform init'
+                sh'terraform plan'
+                sh'terraform ${action} -auto-approve'           
+        }
+            }
+    
+    }
+}
